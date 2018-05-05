@@ -1,0 +1,7 @@
+- name: Setup | Set port to 22023
+  lineinfile:
+    dest: "/etc/ssh/sshd_config"
+    regexp: "^Port"
+    line: "Port 22023"
+    state: present
+  notify: "Restart sshd"
