@@ -1,0 +1,19 @@
+- name: Add Torproject key
+  apt_key:
+    id: A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89
+    keyserver: keyserver.ubuntu.com    
+
+- name: Add repository
+  apt_repository: repo='{{ item }}'
+  state: present
+  filename: torproject
+  with_items:
+    - deb https://deb.torproject.org/torproject.org stretch main
+    - deb https://deb.torproject.org/torproject.org tor-experimental-0.3.3.x-stretch main
+
+- name: Install Tor
+  apt:
+    name: '{{ item }}'
+    with_items:
+    - tor
+    - obfs4proxy
